@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Himnandini Sharma | Odoo Developer & Enterprise Solutions</title>
+    <meta name="description" content="Portfolio of Himnandini Sharma - Odoo Developer specializing in scalable ERP solutions, seamless API integrations, custom OWL components, and modern business applications." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+      (function() {
+        // ALWAYS enforce default Light Mode on page load
+        document.documentElement.classList.remove('dark');
+        if (document.body) {
+          document.body.classList.remove('dark');
+        }
+        localStorage.setItem('theme', 'light');
+      })();
+    </script>
+  </head>
+  <body class="bg-[#f6f8f7] dark:bg-[#080d0c] text-slate-900 dark:text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-700 dark:selection:text-emerald-300 min-h-screen transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

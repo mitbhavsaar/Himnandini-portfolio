@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #fbfafd;
+  --bg-secondary: #f3f0f9;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --accent-purple: #7c3aed;
+  --accent-glow: rgba(124, 58, 237, 0.12);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  --bg-primary: #070d0c;
+  --bg-secondary: #0c1513;
+  --bg-card: #101c19;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-purple: #a78bfa;
+  --accent-glow: rgba(167, 139, 250, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e322d;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34d399;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass-panel {
+  background: rgba(16, 28, 25, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-card {
+  background: #ffffff;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .glass-card {
+  background: linear-gradient(135deg, rgba(20, 36, 32, 0.7) 0%, rgba(12, 22, 19, 0.85) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card:hover {
+  border-color: rgba(5, 150, 105, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(52, 211, 153, 0.3);
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(52, 211, 153, 0.15);
+}
+
+/* Subtle background glowing ambient orbs */
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Handwriting highlight */
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* 3D Perspective & Multi-depth Z-space Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+.translate-z-40 {
+  transform: translateZ(40px);
+}
+
+/* Border Beam Laser Animation */
+@keyframes borderBeam {
+  0% {
+    transform: rotate(0deg) scale(2);
+  }
+  100% {
+    transform: rotate(360deg) scale(2);
+  }
+}
+
+/* 4 Metrics Drop from Top with Realistic Bounce */
+@keyframes dropBounce {
+  0% {
+    transform: translateY(-90px) scale(0.92);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(12px) scale(1.02);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-5px) scale(0.99);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-drop-bounce-1 {
+  animation: dropBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+}
+.animate-drop-bounce-2 {
+  animation: dropBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s both;
+}
+.animate-drop-bounce-3 {
+  animation: dropBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both;
+}
+.animate-drop-bounce-4 {
+  animation: dropBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.75s both;
+}
+
+/* My Journey Left and Right Slide-in & Swap Animations */
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-110px) scale(0.94);
+    opacity: 0;
+  }
+  75% {
+    transform: translateX(6px) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(110px) scale(0.94);
+    opacity: 0;
+  }
+  75% {
+    transform: translateX(-6px) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-slide-left {
+  animation: slideFromLeft 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-slide-right {
+  animation: slideFromRight 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/* Typewriter blinking cursor */
+@keyframes blinkCursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-cursor-blink {
+  animation: blinkCursor 0.8s infinite;
+}
+
+
