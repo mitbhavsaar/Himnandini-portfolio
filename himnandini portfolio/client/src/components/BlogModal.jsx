@@ -16,14 +16,16 @@ export default function BlogModal({ blog, isOpen, onClose }) {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Hero Image */}
-        <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 mb-6 max-h-72 bg-slate-100 dark:bg-[#09110f]">
-          <img
-            src={blog.image}
-            alt={blog.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
+        {/* Hero Image (if available) */}
+        {blog.image && (
+          <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 mb-6 max-h-72 bg-slate-100 dark:bg-[#09110f]">
+            <img
+              src={blog.image}
+              alt={blog.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
 
         {/* Metadata */}
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-3">

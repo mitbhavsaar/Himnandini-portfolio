@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import BlogModal from './BlogModal';
 
 const DEFAULT_BLOGS = [
@@ -10,7 +10,6 @@ const DEFAULT_BLOGS = [
     content: `Processing paper and PDF invoices manually is one of the most time-consuming back-office tasks for growing enterprises. By connecting Azure Document Intelligence with Odoo ERP, we automated the end-to-end ingestion pipeline.\n\n### Architectural Overview\nWhen an invoice email arrives or a user drops a PDF into the Odoo chatter, an asynchronous Python worker triggers an Azure OCR extraction pipeline. Azure identifies structured fields: vendor name, invoice date, due date, line items, quantities, and totals.\n\n### Fuzzy Matching & Tax Reconciliation\nVendor matching uses Levenshtein distance against partner records in Odoo, handling slight variations in vendor naming seamlessly. Line items are automatically mapped to internal product codes, calculating taxes and creating draft accounting moves with 99.8% precision.`,
     date: 'Mar 15, 2026',
     readTime: '5 min read',
-    image: '/images/blog_ocr.jpg',
     tags: ['Azure OCR', 'Odoo ERP', 'Python', 'Automation'],
     author: 'Himnandini Sharma',
   },
@@ -21,7 +20,6 @@ const DEFAULT_BLOGS = [
     content: `Field sales and warehouse teams frequently face spotty internet connections. Standard ERP web applications freeze or crash when connection is lost, interrupting critical workflows. In this article, we explore building offline-first dashboards in Odoo 17 and 18.\n\n### Leveraging OWL Components\nOWL's reactive state management makes it ideal for handling network status events. By pairing OWL components with the browser's IndexedDB, local mutations can be queued with timestamped action logs.\n\n### Auto-Sync & Conflict Handling\nWhen network connectivity is restored, the sync manager broadcasts delta changes to the Odoo backend controller. If multiple users edit the same entity, last-write-wins or semantic merge rules guarantee clean state reconciliation.`,
     date: 'Feb 28, 2026',
     readTime: '6 min read',
-    image: '/images/blog_offline.jpg',
     tags: ['OWL', 'IndexedDB', 'Progressive Web Apps', 'Javascript'],
     author: 'Himnandini Sharma',
   },
@@ -32,7 +30,6 @@ const DEFAULT_BLOGS = [
     content: `Integrating third-party systems with Odoo requires careful planning around authentication, rate limiting, and database concurrency.\n\n### Authentication & Security\nAlways prefer API keys with restricted access rights rather than generic administrator credentials. Implement IP whitelisting in your Nginx reverse proxy configuration for sensitive integration endpoints.\n\n### Batching and Asynchronous Execution\nFor bulk data imports (e-commerce orders, external inventory updates), avoid synchronous transactional commits in the main HTTP thread. Utilize Odoo's queue_job or Celery workers to decouple incoming webhook ingestion from heavy database writes.`,
     date: 'Feb 10, 2026',
     readTime: '4 min read',
-    image: '/images/blog_api.jpg',
     tags: ['REST API', 'PostgreSQL', 'Webhooks', 'Odoo 18'],
     author: 'Himnandini Sharma',
   },
@@ -87,38 +84,50 @@ export default function Blog() {
           </button>
         </div>
 
-        {/* 3 Blog Cards (matches screenshot) */}
+        {/* 3 Blog Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <div
               key={blog._id || blog.title}
               onClick={() => setSelectedBlog(blog)}
-              className="group rounded-2xl bg-white dark:bg-[#0e1a17]/90 hover:bg-slate-50 dark:hover:bg-[#132420] border border-slate-200/80 dark:border-white/8 hover:border-purple-500/40 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col shadow-xs hover:shadow-md dark:shadow-lg hover:-translate-y-1.5"
+              className="group rounded-2xl bg-white dark:bg-[#0e1a17]/90 hover:bg-slate-50 dark:hover:bg-[#132420] border border-slate-200/80 dark:border-white/8 hover:border-purple-500/40 transition-all duration-300 p-6 cursor-pointer flex flex-col justify-between shadow-xs hover:shadow-md dark:shadow-lg hover:-translate-y-1.5"
             >
-              {/* Image */}
-              <div className="relative aspect-[16/9] overflow-hidden bg-slate-100 dark:bg-[#070d0c]">
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 dark:from-[#0e1a17] via-transparent to-transparent opacity-60" />
+              <div>
+                {/* Header with Tags & Read Time */}
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="flex flex-wrap gap-1.5">
+                    {blog.tags?.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border border-purple-200/50 dark:border-purple-500/20"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-xs text-slate-400 dark:text-slate-500 font-medium shrink-0">
+                    {blog.readTime}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-lg font-serif font-bold text-slate-950 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors leading-snug mb-3">
+                  {blog.title}
+                </h3>
+
+                {/* Excerpt */}
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                  {blog.excerpt}
+                </p>
               </div>
 
-              {/* Content */}
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-base font-semibold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors leading-snug">
-                    {blog.title}
-                  </h3>
-                </div>
-
-                {/* Footer with Date & Read time */}
-                <div className="mt-4 pt-3 border-t border-slate-200 dark:border-white/5 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                  <span>{blog.date}</span>
-                  <span>•</span>
-                  <span>{blog.readTime}</span>
-                </div>
+              {/* Footer */}
+              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                <span>{blog.date}</span>
+                <span className="text-purple-600 dark:text-purple-400 font-medium inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                  Read Article
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </span>
               </div>
             </div>
           ))}
